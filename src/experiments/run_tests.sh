@@ -2,8 +2,6 @@
 
 set -xe
 
-
-
 # location of all test datasets
 test_dir=../../data/test
 
@@ -27,10 +25,10 @@ run_one_test() {
 }
 
 
-# run_one_test politika punktrus_whitespace
-# run_one_test politika punktrus_treebank
-# run_one_test politika punktrus_srbregex
-# run_one_test politika punktsrb_srbregex
+run_one_test politika punktrus_whitespace
+run_one_test politika punktrus_treebank
+run_one_test politika punktrus_srbregex
+run_one_test politika punktsrb_srbregex
 
 cut -f1,5,3 out/politika/punktrus_whitespace/result.tsv | sed 's/\t/ | /g' > results.md
 cut -f1,5,3 out/politika/punktrus_whitespace/result.tsv | sed 's/[a-zA-Z]/-/g' | sed 's/\t/ | /g' >> results.md
