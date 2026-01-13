@@ -30,9 +30,9 @@ run_one_test politika punktrus_treebank
 run_one_test politika punktrus_srbregex
 run_one_test politika punktsrb_srbregex
 
-cut -f1,5,3 out/politika/punktrus_whitespace/result.tsv | sed 's/\t/ | /g' > results.md
-cut -f1,5,3 out/politika/punktrus_whitespace/result.tsv | sed 's/[a-zA-Z]/-/g' | sed 's/\t/ | /g' >> results.md
-cut -f2,6,4 out/politika/punktrus_whitespace/result.tsv | sed 's/\t/ | /g' >> results.md
-cut -f2,6,4 out/politika/punktrus_treebank/result.tsv | sed 's/\t/ | /g' >> results.md
-cut -f2,6,4 out/politika/punktrus_srbregex/result.tsv | sed 's/\t/ | /g' >> results.md
-cut -f2,6,4 out/politika/punktsrb_srbregex/result.tsv | sed 's/\t/ | /g' >> results.md
+cut -f1,5,3 out/politika/punktrus_whitespace/result.tsv | sed 's/^/Sentence Tokenizer | Word Tokenizer | /g' | sed 's/\t/ | /g' > results.md
+cut -f1,5,3 out/politika/punktrus_whitespace/result.tsv | sed 's/^/| ------- | --------| /g'| sed 's/[a-zA-Z]/-/g' | sed 's/\t/ | /g' >> results.md
+cut -f2,6,4 out/politika/punktrus_whitespace/result.tsv | sed 's/^/Russian PunktTokenizer | WhitespaceTokenizer | /g'| sed 's/\t/ | /g' >> results.md
+cut -f2,6,4 out/politika/punktrus_treebank/result.tsv | sed 's/^/Russian PunktTokenizer | TreebankTokenizer | /g'| sed 's/\t/ | /g' >> results.md
+cut -f2,6,4 out/politika/punktrus_srbregex/result.tsv | sed 's/^/Russian PunktTokenizer | SrbRegexTokenizer | /g'| sed 's/\t/ | /g' >> results.md
+cut -f2,6,4 out/politika/punktsrb_srbregex/result.tsv | sed 's/^/Serbian PunktTokenizer | SrbRegexTokenizer | /g'| sed 's/\t/ | /g' >> results.md
