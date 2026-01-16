@@ -7,7 +7,7 @@ name = "srbtok"
 version = "0.1.0"
 description = "Word and sentence tokenization for Serbian Cyrillic."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "GPL-3.0-or-later" 
 license-files = ["LICENSE*"] 
 
@@ -16,6 +16,7 @@ dependencies = [
     "joblib==1.5.3",
     "levenshtein==0.27.3",
     "nltk==3.9.2",
+    "pytest>=9.0.2",
     "rapidfuzz==3.14.3",
     "regex==2025.11.3",
     "tqdm==4.67.1",
@@ -25,5 +26,8 @@ dependencies = [
 where = ["src"]
 include = ["srbtok*"]
 exclude = ["experiments*", "tools*", "train_punkt*"]
+
+[tool.setuptools.package-data]
+"srbtok" = ["serbian_punkt_nltk.pickle"]
 
 # Automatically includes your license files in the build

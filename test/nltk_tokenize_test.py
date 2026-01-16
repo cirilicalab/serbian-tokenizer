@@ -1,7 +1,8 @@
 import unittest
 import io
 
-from tools.nltk_tokenize import * 
+from srbtok.utils import word_spans_to_tokenized_text, tokenize_stream, WORD_SEP
+from tools.nltk_tokenize import create_word_tokenizer
 
 class TestNLTKTokenize(unittest.TestCase):
     def test_word_spans_to_segmented_text(self):

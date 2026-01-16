@@ -1,3 +1,5 @@
+
+
 def shift_spans_by_offset(spans, offset):
     for i in range(0, len(spans)):
         spans[i] = (spans[i][0] + offset, spans[i][1] + offset)
@@ -48,7 +50,7 @@ class CascadeTokenizer:
 
     def span_tokenize(self, text):
         '''
-        Run cascade of sentence tokenizer and word tokenizer and return word spans.
+        Run cascade of sentence tokenizer and word tokenizer and return word spans: (start, end).
         
         :param text: Input text
         returns: List of (start, end) pairs that represent word spans. Word is text[start:end].
@@ -58,3 +60,13 @@ class CascadeTokenizer:
         for sent_span in sent_segments:
             word_segments.extend(self._sentence_word_segments(text, sent_span))
         return word_segments
+    
+    def tokenize(self, text):
+        '''
+        Run cascade of sentence tokenizer and word tokenizer and return list of word strings.
+        
+        :param text: Input text
+        returns: List of word strings.
+        '''
+        return [text[start:end] for start, end in self.span_tokenize(text)]
+

@@ -1,5 +1,5 @@
 import unittest
-from srbtok import SrbRegexpWordTokenizer
+from srbtok.srb_tokenizer import SrbRegexpWordTokenizer
 
 
 class SrbRegexpTokenizerTest(unittest.TestCase):
