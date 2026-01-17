@@ -21,7 +21,7 @@ echo "Др. Марко Топаловић је дежурни лекар." | pyt
 Др . Марко Топаловић је дежурни лекар .
 ```
 
-Као Пајтон библиотека
+Као Пајтон модул
 ```python
 >>> from srbtok import SrbTokenizer
 >>> tokenizer = SrbTokenizer()
