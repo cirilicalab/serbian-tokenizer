@@ -21,7 +21,7 @@ run_one_test() {
     cat ${dataset_dir}/file_list.txt | xargs -I {} ${tokenizer} ${dataset_dir}/raw/{} ${out_dir}/tokenized/{}
 
     # compute result
-    python ../tools/score.py --expected-dir ${dataset_dir}/expected --actual-dir ${out_dir}/tokenized --per-file-results ${out_dir}/per_file_results.tsv > ${out_dir}/result.tsv
+    python3 ../tools/score.py --expected-dir ${dataset_dir}/expected --actual-dir ${out_dir}/tokenized --per-file-results ${out_dir}/per_file_results.tsv > ${out_dir}/result.tsv
 }
 
 

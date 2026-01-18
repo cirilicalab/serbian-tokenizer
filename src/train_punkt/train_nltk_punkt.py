@@ -6,13 +6,14 @@ from nltk.tokenize.punkt import PunktTrainer
 
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from srbtok import normalize_text
+from srbtok.srb_tokenizer import normalize_text
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Training corpora for the NLTK Punkt tokenizer.')
     parser.add_argument('-t', '--train', help='Training corpora.', required=True)
     parser.add_argument('-m', '--model', help="Output Punkt model as pickle file.", required=True)
+    parser.add_argument('-ad', '--abbreviations-dict', required=False, help="File with list of abbreviations to be manually added to the tokenizer.")
     return parser.parse_args()
 
 
@@ -27,6 +28,24 @@ def next_batch(file, batch_size):
     return "".join(lines)
 
 
+def read_abbreviations_from_file(file_path):
+    abbreviations = set()
+    with open(file_path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.rstrip('\r\n')
+            if not line or line.isspace() or line.startswith("#"):
+                continue
+            abbreviations.add(line.split('\t')[0])
+    return abbreviations
+
+
+def remove_dot_at_end(text):
+    end_index = len(text) - 1
+    while end_index > 0 and text[end_index] == '.':
+        end_index -= 1
+    return text[:end_index + 1]
+
+
 def get_file_size(f):
     f.seek(0, os.SEEK_END)
     size = f.tell()
@@ -39,6 +58,10 @@ if __name__ == "__main__":
     trainer = PunktTrainer()
     batch_size = 100000
 
+
+    if args.abbreviations_dict:
+        print("Adding abbreviations from dictionary: %s" % args.abbreviations_dict)
+        read_abbreviations_from_file(args.abbreviations_dict)
 
     with tqdm(total=1000) as p_bar:
         print = tqdm.write
@@ -67,9 +90,14 @@ if __name__ == "__main__":
 
     print("Finalize training")
     trainer.finalize_training(verbose=True)
-
-    print("Saving parameters")
     params = trainer.get_params()
 
+
+    if args.abbreviations_dict:
+        print("Adding abbreviations from dictionary: %s" % args.abbreviations_dict)
+        extra_abbreviations = read_abbreviations_from_file(args.abbreviations_dict)
+        params.abbrev_types.update(extra_abbreviations)
+
+    print("Saving parameters")
     with open(args.model, "wb") as out_file:
         pickle.dump(params, out_file)

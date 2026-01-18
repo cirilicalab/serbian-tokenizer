@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$(dirname "$0")
-tokenize="python ${SCRIPT_DIR}/../../tools/nltk_tokenize.py --sent-tokenizer PunktTokenizer(russian) --word-tokenizer WhitespaceTokenizer"
+tokenize="python3 ${SCRIPT_DIR}/../../tools/nltk_tokenize.py --sent-tokenizer PunktTokenizer(russian) --word-tokenizer WhitespaceTokenizer"
 
 in_file=$1
 out_file=$2
